@@ -1,0 +1,12 @@
+---
+version: '3.3'
+services:
+  fileserver:
+    image: 'atompi/fileserver:v1.16.1'
+    ports:
+      - '8001:80'
+    restart: always
+    volumes:
+      - '/data/fileserver/uploads:/data/uploads'
+      - '/data/fileserver/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf'
+      - '/data/fileserver/conf/.htpasswd:/usr/local/nginx/conf/.htpasswd'
