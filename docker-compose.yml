@@ -1,8 +1,8 @@
 ---
-version: '3.3'
+version: '3.9'
 services:
   fileserver:
-    image: 'atompi/fileserver:v1.16.1'
+    image: 'hub.gitee.com/autom-studio/fileserver:v1.22.0'
     ports:
       - '8001:80'
     restart: always

@@ -1,13 +1,12 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 LABEL maintainer="Atompi <atomissionpi@gmail.com>"
 
-ENV NGINX_VERSION=1.16.1 \
-    LUA_NGINX_MODULE_TAG=v0.10.15
+ENV NGINX_VERSION=1.22.0 \
+    LUA_NGINX_MODULE_TAG=v0.10.22
 
-COPY sources.list /etc/apt/sources.list
-
-RUN addgroup --system --gid 101 nginx \
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
+    && addgroup --system --gid 101 nginx \
     && adduser --system --disabled-login --ingroup nginx --no-create-home --home /nonexistent --gecos "nginx user" --shell /bin/false --uid 101 nginx \
     && apt update \
     && apt install -y \
