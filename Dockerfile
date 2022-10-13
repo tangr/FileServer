@@ -2,8 +2,7 @@ FROM debian:bullseye-slim
 
 LABEL maintainer="Atompi <atomissionpi@gmail.com>"
 
-ENV NGINX_VERSION=1.22.0 \
-    LUA_NGINX_MODULE_TAG=v0.10.22
+ENV NGINX_VERSION=1.22.0
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
     && addgroup --system --gid 101 nginx \
@@ -20,11 +19,19 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
     && cd /tmp \
     && wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz \
     && git clone https://gitee.com/atompi/luajit2 \
-    && git clone https://gitee.com/atompi/lua-nginx-module -b $LUA_NGINX_MODULE_TAG \
+    && git clone https://gitee.com/atompi/lua-resty-core \
+    && git clone https://gitee.com/atompi/lua-resty-lrucache \
+    && git clone https://gitee.com/atompi/lua-nginx-module \
     && git clone https://gitee.com/atompi/ngx-fancyindex \
     && git clone https://gitee.com/atompi/ngx_devel_kit \
     && tar -zxf nginx-$NGINX_VERSION.tar.gz \
     && cd /tmp/luajit2 \
+    && make \
+    && make install \
+    && cd /tmp/lua-resty-core \
+    && make \
+    && make install \
+    && cd /tmp/lua-resty-lrucache \
     && make \
     && make install \
     && cd /tmp/nginx-$NGINX_VERSION \
