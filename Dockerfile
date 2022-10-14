@@ -50,8 +50,7 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
     --add-module=/tmp/ngx_devel_kit \
     && make \
     && make install \
-    && mkdir -p /usr/local/lib/lua/5.1/resty \
-    && wget https://gitee.com/atompi/lua-resty-upload/raw/master/lib/resty/upload.lua -O /usr/local/lib/lua/5.1/resty/upload.lua \
+    && wget https://gitee.com/atompi/lua-resty-upload/raw/master/lib/resty/upload.lua -O /usr/local/lib/lua/resty/upload.lua \
     && apt remove -qq -y --purge \
     build-essential \
     git \
